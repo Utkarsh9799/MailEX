@@ -5,6 +5,9 @@ const keys = require('./config/keys');
 // For including the authentication strategy
 require('./services/passport');
 
+// For user model in MongoDB
+require('./models/user');
+
 // Estabilishing MongoDB connection
 mongoose.connect(keys.mongoURI, {
 	useNewUrlParser: true,
