@@ -2,11 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 
+// For user model class in MongoDB
+require('./models/user');
+
 // For including the authentication strategy
 require('./services/passport');
-
-// For user model in MongoDB
-require('./models/user');
 
 // Estabilishing MongoDB connection
 mongoose.connect(keys.mongoURI, {
