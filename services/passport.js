@@ -6,6 +6,18 @@ const keys = require('../config/keys');
 // Loading the users model in user object of model class
 const user = mongoose.model('users');
 
+// Serialising user by providing them token and storing it in cookies for identification of user for follow up requests
+passport.serializeUser((user, done) => {
+	done(null, user.id);
+});
+
+// Deserialising the user by getting the id from cookie and returning the user
+passport.deserializeUser((id, done) => {
+	user.findById(id).then((user) => {
+		done(null, user);
+	});
+});
+
 passport.use(
 	new GoogleStrategy(
 		{
@@ -15,11 +27,14 @@ passport.use(
 		},
 		(accessToken, refreshToken, profile, done) => {
 			user.findOne({ googleID: profile.id }).then((userExists) => {
-				if (userExists) {
+				if (existingUser) {
 					// Don't create a new record
+					done(null, existingUser);
 				} else {
 					// Create a new record
-					new user({ googleID: profile.id }).save();
+					new user({ googleID: profile.id })
+						.save()
+						.then((createdUser) => done(null, createdUser));
 				}
 			});
 		}
