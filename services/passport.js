@@ -26,15 +26,15 @@ passport.use(
 			callbackURL: '/auth/google/callback',
 		},
 		(accessToken, refreshToken, profile, done) => {
-			user.findOne({ googleID: profile.id }).then((userExists) => {
+			user.findOne({ googleID: profile.id }).then((existingUser) => {
 				if (existingUser) {
-					// Don't create a new record
 					done(null, existingUser);
 				} else {
-					// Create a new record
 					new user({ googleID: profile.id })
 						.save()
-						.then((createdUser) => done(null, createdUser));
+						.then((createdUser) => {
+							done(null, createdUser);
+						});
 				}
 			});
 		}

@@ -9,6 +9,11 @@ module.exports = (app) => {
 		})
 	);
 
-	// Callback will have the code
+	// Callback will have the code returned by google server
 	app.get('/auth/google/callback', passport.authenticate('google'));
+
+	// Responding after authentication
+	app.get('/api/current_user', (req, res) => {
+		res.send(req.user);
+	});
 };
