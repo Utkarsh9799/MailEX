@@ -1,5 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
+
+//For accessing cookies for authentication
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+
+//For MongoURI and encrypting cookies in cookieSession
 const keys = require('./config/keys');
 
 // For user model class in MongoDB
@@ -16,6 +22,18 @@ mongoose.connect(keys.mongoURI, {
 
 // Initialising express app
 const app = express();
+
+//Enabling cookies
+app.use(
+	cookieSession({
+		maxAge: 30 * 24 * 60 * 60 * 1000,
+		keys: [keys.cookieKey],
+	})
+);
+
+app.use(passport.initialize());
+
+app.use(passport.session());
 
 // For handling authentication routes
 require('./routes/authRoutes')(app);
