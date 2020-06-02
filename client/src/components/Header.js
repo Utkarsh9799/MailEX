@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
 	renderContent() {
-		if (this.props.auth == null) {
+		if (this.props.auth === null) {
 			return;
-		} else if (this.props.auth == false) {
+		} else if (this.props.auth === false) {
 			return (
 				<li>
 					<a href="/auth/google">Login With Google</a>

@@ -8,6 +8,10 @@
 # testing
 /coverage
 
+# stripe keys
+.env.production
+.env.development
+
 # production
 /build
 
