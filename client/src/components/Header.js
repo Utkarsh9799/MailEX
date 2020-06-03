@@ -15,10 +15,10 @@ class Header extends Component {
 			);
 		} else {
 			return [
-				<li>
+				<li key="1">
 					<Payments />
 				</li>,
-				<li>
+				<li key="2">
 					<a href="/api/logout">Logout</a>
 				</li>,
 			];
