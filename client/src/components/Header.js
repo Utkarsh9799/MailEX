@@ -15,10 +15,13 @@ class Header extends Component {
 			);
 		} else {
 			return [
-				<li key="1">
+				<li key="1" style={{ marginRight: '10px' }}>
+					Credits: {this.props.auth.credits}
+				</li>,
+				<li key="2" style={{ margin: '0 10px' }}>
 					<Payments />
 				</li>,
-				<li key="2">
+				<li key="3" style={{ marginRight: '10px' }}>
 					<a href="/api/logout">Logout</a>
 				</li>,
 			];
@@ -31,6 +34,7 @@ class Header extends Component {
 					<Link
 						to={this.props.auth ? '/surveys' : '/'}
 						className="brand-logo"
+						style={{ marginLeft: '15px' }}
 					>
 						MailEX
 					</Link>
