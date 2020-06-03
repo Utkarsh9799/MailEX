@@ -11,7 +11,7 @@ export const fetchUser = () => {
 };
 
 // Action creator to take the stripe token and send to backend API for biiling the user
-export const handleToke = (token) => {
+export const handleToken = (token) => {
 	return async (dispatch) => {
 		const res = await axios.post('/api/stripe', token);
 		dispatch({ type: 'FETCH_USER', payload: res.data });

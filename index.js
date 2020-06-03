@@ -23,6 +23,9 @@ mongoose.connect(keys.mongoURI, {
 // Initialising express app
 const app = express();
 
+// Express body parser
+app.use(express.json());
+
 //Enabling cookies
 app.use(
 	cookieSession({
@@ -37,6 +40,9 @@ app.use(passport.session());
 
 // For handling authentication routes
 require('./routes/authRoutes')(app);
+
+// For handling billing
+require('./routes/billingRoutes')(app);
 
 // Listening on dynamic env port or 5000
 const PORT = process.env.PORT || 5000;
