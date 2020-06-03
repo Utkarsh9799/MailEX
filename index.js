@@ -44,6 +44,18 @@ require('./routes/authRoutes')(app);
 // For handling billing
 require('./routes/billingRoutes')(app);
 
+// Routing logic for production environment
+if (process.env.NODE_ENV === 'production') {
+	// Serving production assests (production build of CRA)
+	app.use(express.static('client/build'));
+
+	// Serving index.html if route not recognised by express server
+	const path = require('path');
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+}
+
 // Listening on dynamic env port or 5000
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
