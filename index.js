@@ -11,6 +11,9 @@ const keys = require('./config/keys');
 // For user model class in MongoDB
 require('./models/user');
 
+// For survet model class in MongoDB
+require('./models/survey');
+
 // For including the authentication strategy
 require('./services/passport');
 
