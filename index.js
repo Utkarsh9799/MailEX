@@ -47,6 +47,9 @@ require('./routes/authRoutes')(app);
 // For handling billing
 require('./routes/billingRoutes')(app);
 
+// For handling survey routes
+require('./routes/surveyRoutes')(app);
+
 // Routing logic for production environment
 if (process.env.NODE_ENV === 'production') {
 	// Serving production assests (production build of CRA)
