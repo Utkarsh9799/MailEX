@@ -8,6 +8,10 @@ import reduxThunk from 'redux-thunk';
 import App from './components/App';
 import reducers from './reducers';
 
+// For making post requests to test email
+// import axios from 'axios';
+// window.axios = axios;
+
 // Creating a Redux store
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
