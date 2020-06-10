@@ -8,8 +8,8 @@ import * as actions from '../actions/index';
 // Importing components
 import Header from './Header';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
 const SurveyNew = () => <h2>SurveyNew</h2>;
-const Dashboard = () => <h2>Dashboard</h2>;
 
 class App extends Component {
 	componentDidMount() {

@@ -1,6 +1,6 @@
 // For ajax requests
 import axios from 'axios';
-import { FETCH_USER } from './types';
+// import { FETCH_USER } from './types';
 
 // Action creator for fetching user info to know wheather user is logged in or not
 export const fetchUser = () => {
