@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 // Importing redux form helper to communicate with redux store and field component for rendering html tags
 import { reduxForm, Field } from 'redux-form';
 import SurveyField from './SurveyField';
+import validateEmails from '../../utils/validateEmails';
 
 const Fields = [
 	{ label: 'Survey Title', name: 'title' },
@@ -53,6 +54,8 @@ class SurveyForm extends Component {
 
 const validateForm = (values) => {
 	const errors = {};
+
+	errors.emails = validateEmails(values.emails || '');
 
 	Fields.forEach(({ name }) => {
 		if (!values[name]) {
