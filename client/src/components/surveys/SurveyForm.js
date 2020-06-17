@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 // Importing redux form helper to communicate with redux store and field component for rendering html tags
 import { reduxForm, Field } from 'redux-form';
 import SurveyField from './SurveyField';
@@ -34,15 +35,36 @@ class SurveyForm extends Component {
 					)}
 				>
 					{this.renderFields()}
-
-					<button type="submit">Submit</button>
+					<Link to="/surveys" className="red btn-flat white-text">
+						<i className="material-icons right">cancel</i>Cancel
+					</Link>
+					<button
+						className="teal btn-flat right white-text"
+						type="submit"
+					>
+						<i className="material-icons right">done</i>
+						Next
+					</button>
 				</form>
 			</div>
 		);
 	}
 }
 
+const validateForm = (values) => {
+	const errors = {};
+
+	Fields.forEach(({ name }) => {
+		if (!values[name]) {
+			errors[name] = 'This field can not be empty!';
+		}
+	});
+
+	return errors;
+};
+
 // Adding props to the class component
 export default reduxForm({
 	form: 'surveyForm',
+	validate: validateForm,
 })(SurveyForm);
