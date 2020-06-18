@@ -19,6 +19,9 @@ export const handleToken = (token) => {
 };
 
 // Action creator to send the survey to all the recipients
-export const sendSurvey = (values) => {
-	return { type: 'send_survey' };
+export const sendSurvey = (values, history) => async (dispatch) => {
+	const res = await axios.post('/api/surveys', values);
+
+	history.push('/surveys');
+	dispatch({ type: 'FETCH_USER', payload: res.data });
 };
