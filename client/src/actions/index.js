@@ -17,3 +17,8 @@ export const handleToken = (token) => {
 		dispatch({ type: 'FETCH_USER', payload: res.data });
 	};
 };
+
+// Action creator to send the survey to all the recipients
+export const sendSurvey = (values) => {
+	return { type: 'send_survey' };
+};

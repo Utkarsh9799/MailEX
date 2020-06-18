@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 // Importing redux form helper to communicate with redux store and field component for rendering html tags
 import { reduxForm, Field } from 'redux-form';
 import SurveyField from './SurveyField';
 import validateEmails from '../../utils/validateEmails';
-
-const Fields = [
-	{ label: 'Survey Title', name: 'title' },
-	{ label: 'Subject Line', name: 'subject' },
-	{ label: 'Email Body', name: 'body' },
-	{ label: 'Recipients List', name: 'emails' },
-];
+import formFields from './formFields';
 
 class SurveyForm extends Component {
-	renderFields() {
-		return Fields.map(({ name, label }) => {
+	renderformFields() {
+		return formFields.map(({ name, label }) => {
 			return (
 				<Field
 					key={name}
@@ -31,11 +26,11 @@ class SurveyForm extends Component {
 		return (
 			<div>
 				<form
-					onSubmit={this.props.handleSubmit((values) =>
-						console.log(values)
+					onSubmit={this.props.handleSubmit(
+						this.props.onSurveySubmit
 					)}
 				>
-					{this.renderFields()}
+					{this.renderformFields()}
 					<Link to="/surveys" className="red btn-flat white-text">
 						<i className="material-icons right">cancel</i>Cancel
 					</Link>
@@ -55,9 +50,9 @@ class SurveyForm extends Component {
 const validateForm = (values) => {
 	const errors = {};
 
-	errors.emails = validateEmails(values.emails || '');
+	errors.recipients = validateEmails(values.recipients || '');
 
-	Fields.forEach(({ name }) => {
+	formFields.forEach(({ name }) => {
 		if (!values[name]) {
 			errors[name] = 'This field can not be empty!';
 		}
@@ -70,4 +65,5 @@ const validateForm = (values) => {
 export default reduxForm({
 	form: 'surveyForm',
 	validate: validateForm,
+	destroyOnUnmount: false, // To persist survey data
 })(SurveyForm);
