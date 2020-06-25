@@ -15,18 +15,23 @@ module.exports = (app) => {
 	});
 
 	app.post('/api/surveys/webhooks', (req, res) => {
-		const events = req.body.map(({ email, url }) => {
-			const pathname = new URL(url).pathname;
-			const p = new Path('/api/surveys/:surveyId/:choice');
-			const match = p.test(pathname);
-			if (match) {
-				return { email, ...match };
-			}
-		});
+		const p = new Path('/api/surveys/:surveyId/:choice');
 
-		const compactEvents = _.compact(events); // Removing falsey values or undefined events
-		const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
-		console.log(uniqueEvents);
+		const events = _.chain(req.body)
+			.filter(({ event }) => email && url && event === 'click') // Checking for click events
+			.map(({ email, url }) => {
+				const match = p.test(new URL(url).pathname); // Extracting data from url
+
+				if (match) {
+					return { email, ...match }; // Removing undefined and falsey values from array
+				}
+			})
+			.uniqWith(
+				(a, b) => a.email === b.email && a.surveyId === b.surveyId // Removing duplicates with same email on same survey
+			)
+			.value(); // To pull the array out
+
+		console.log('uniqueResponses:\n', uniqueResponses);
 		res.send({});
 	});
 
