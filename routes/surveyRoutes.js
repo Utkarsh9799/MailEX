@@ -29,9 +29,26 @@ module.exports = (app) => {
 			.uniqWith(
 				(a, b) => a.email === b.email && a.surveyId === b.surveyId // Removing duplicates with same email on same survey
 			)
+			.each(({ surveyId, email, choice }) => {
+				survey
+					.updateOne(
+						{
+							_id: surveyId,
+							recipients: {
+								$elemMatch: { email: email, responded: false },
+							},
+						},
+						{
+							$inc: { [choice]: 1 },
+							$set: { 'recipients.$.responded': true },
+						}
+					)
+					.exec();
+			})
 			.value(); // To pull the array out
 
-		console.log('uniqueResponses:\n', events);
+		// console.log('uniqueResponses:\n', events);
+
 		res.send({});
 	});
 
