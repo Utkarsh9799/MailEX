@@ -18,7 +18,7 @@ module.exports = (app) => {
 		const p = new Path('/api/surveys/:surveyId/:choice');
 
 		const events = _.chain(req.body)
-			.filter(({ event }) => email && url && event === 'click') // Checking for click events
+			.filter(({ event }) => event === 'click') // Checking for click events
 			.map(({ email, url }) => {
 				const match = p.test(new URL(url).pathname); // Extracting data from url
 
@@ -31,7 +31,7 @@ module.exports = (app) => {
 			)
 			.value(); // To pull the array out
 
-		console.log('uniqueResponses:\n', uniqueResponses);
+		console.log('uniqueResponses:\n', events);
 		res.send({});
 	});
 
