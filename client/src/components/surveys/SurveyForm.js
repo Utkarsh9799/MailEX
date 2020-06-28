@@ -26,21 +26,25 @@ class SurveyForm extends Component {
 		return (
 			<div>
 				<form
+					style={{ marginTop: '3%' }}
 					onSubmit={this.props.handleSubmit(
 						this.props.onSurveySubmit
 					)}
 				>
-					{this.renderformFields()}
-					<Link to="/surveys" className="red btn-flat white-text">
-						<i className="material-icons right">cancel</i>Cancel
-					</Link>
-					<button
-						className="teal btn-flat right white-text"
-						type="submit"
-					>
-						<i className="material-icons right">done</i>
-						Next
-					</button>
+					<fieldset style={{ padding: '5%' }}>
+						<legend>Survey Form</legend>
+						{this.renderformFields()}
+						<Link to="/surveys" className="red btn-flat white-text">
+							<i className="material-icons right">cancel</i>Cancel
+						</Link>
+						<button
+							className="teal btn-flat right white-text"
+							type="submit"
+						>
+							<i className="material-icons right">done</i>
+							Next
+						</button>
+					</fieldset>
 				</form>
 			</div>
 		);

@@ -16,12 +16,18 @@ class Header extends Component {
 		} else {
 			return [
 				<li key="1" style={{ marginRight: '10px' }}>
-					Credits: {this.props.auth.credits}
+					<a href="/surveys">Dashboard</a>
 				</li>,
-				<li key="2" style={{ margin: '0 10px' }}>
-					<Payments />
+				<li key="2" style={{ marginRight: '10px' }}>
+					<a href="/surveys/new">New Survey</a>
 				</li>,
 				<li key="3" style={{ marginRight: '10px' }}>
+					Credits: {this.props.auth.credits}
+				</li>,
+				<li key="4" style={{ margin: '0 10px' }}>
+					<Payments />
+				</li>,
+				<li key="5" style={{ marginRight: '10px' }}>
 					<a href="/api/logout">Logout</a>
 				</li>,
 			];
@@ -32,7 +38,7 @@ class Header extends Component {
 			<nav>
 				<div className="nav-wrapper cyan">
 					<Link
-						to={this.props.auth ? '/surveys' : '/'}
+						to="/"
 						className="brand-logo"
 						style={{ marginLeft: '15px' }}
 					>

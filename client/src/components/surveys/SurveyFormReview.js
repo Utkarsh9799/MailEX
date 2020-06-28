@@ -7,31 +7,46 @@ import * as actions from '../../actions';
 function SurveyFormReview({ onCancel, formValues, sendSurvey, history }) {
 	const reviewFields = formFields.map(({ name, label }) => {
 		return (
-			<div key={name}>
-				<label>{label}</label>
-				<div>{formValues[name]}</div>
+			<div style={{ padding: '2%' }}>
+				<div key={name} style={{ margin: '0 10px' }}>
+					<label
+						style={{
+							color: 'black',
+							fontSize: '20px',
+							fontWeight: '600',
+						}}
+					>
+						{label}
+					</label>
+					<div>{formValues[name]}</div>
+				</div>
 			</div>
 		);
 	});
 
 	return (
 		<div>
-			<h5>Please confirm your entries</h5>
-			{reviewFields}
-			<button
-				className="yellow darken-3 btn-flat left white-text"
-				onClick={onCancel}
-			>
-				<i className="material-icons right">undo</i>
-				Back
-			</button>
-			<button
-				className="green btn-flat right white-text"
-				onClick={() => sendSurvey(formValues, history)}
-			>
-				<i className="material-icons right">send</i>
-				Send
-			</button>
+			<h5 style={{ marginBottom: '3%', marginTop: '3%' }}>
+				Please confirm your entries
+			</h5>
+			<div style={{ border: '1px solid black' }}>{reviewFields}</div>
+
+			<div style={{ marginTop: '5%' }}>
+				<button
+					className="yellow darken-3 btn-flat left white-text"
+					onClick={onCancel}
+				>
+					<i className="material-icons right">undo</i>
+					Back
+				</button>
+				<button
+					className="green btn-flat right white-text"
+					onClick={() => sendSurvey(formValues, history)}
+				>
+					<i className="material-icons right">send</i>
+					Send
+				</button>
+			</div>
 		</div>
 	);
 }
